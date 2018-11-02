@@ -11,10 +11,18 @@
 
         <!-- Styles -->
         <style>
+            @font-face {
+                font-family:'Bmitra';
+                src: url('/fonts/BTITRBOLD.ttf');
+            }
+            @font-face {
+                font-family: 'IranNastaliq';
+                src: url('/fonts/IranNastaliq.eot?#') format('eot'),
+                url('/fonts/IranNastaliq.ttf') format('truetype'),
+                url('/fonts/IranNastaliq.woff') format('woff');
+            }
             html, body {
                 background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -49,13 +57,10 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: grey;
                 padding: 0 25px;
-                font-size: 12px;
                 font-weight: 600;
-                letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
             }
 
             .m-b-md {
@@ -63,34 +68,23 @@
             }
         </style>
     </head>
-    <body>
+    <body style="font-family:'Bmitra'">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">پنل ادمین</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        <a href="{{ route('login') }}">ورود</a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ Route('slider') }}" style="text-decoration: none; color: inherit; font-family:'IranNastaliq'">
+                        اعلامیه های الکترونیک دانشگاه شهید بهشتی
+                    </a>
                 </div>
             </div>
         </div>

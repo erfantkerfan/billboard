@@ -18,9 +18,21 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family:'Bmitra';
+            src: url('/fonts/BTITRBOLD.ttf');
+        }
+        @font-face {
+            font-family: 'IranNastaliq';
+            src: url('/fonts/IranNastaliq.eot?#') format('eot'),
+            url('/fonts/IranNastaliq.ttf') format('truetype'),
+            url('/fonts/IranNastaliq.woff') format('woff');
+        }
+    </style>
 </head>
-<body>
-    <div id="app">
+<body style="font-family:'Bmitra;'">
+    <div id="app" style="font-family:'Bmitra;'">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -39,26 +51,26 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
+                        @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">ایجاد کاربر</a>
                             </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        پنل ادمین
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('password') }}">
+                                        تغییر رمز عبور
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                                 document.getElementById('logout-form').submit();" style="color:red;">
+                                        خروج
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -66,7 +78,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>

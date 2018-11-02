@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -31,16 +34,6 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
-    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -49,8 +42,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -61,12 +53,42 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        User::create([
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
         ]);
+
+        return redirect(Route('home'));
+    }
+
+    public function showPasswordForm()
+    {
+        return view('auth.password');
+    }
+
+    public function password(Request $request)
+    {
+        Validator::extend('old_password', function ($attribute, $value, $parameters, $validator) {
+            return Hash::check($value, current($parameters));
+        });
+
+        $this->Validate($request,[
+            'old_password' => 'required|old_password:' . Auth::user()->password,
+            'password' => 'string|min:6|confirmed'
+        ]);
+
+        $user = User::FindOrFail(Auth::user()->id);
+        $user->password = bcrypt($request['password']);
+        $user->save();
+        return redirect(route('home'));
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::FindOrFail($request->id);
+        $user -> delete();
+        return back();
     }
 }
