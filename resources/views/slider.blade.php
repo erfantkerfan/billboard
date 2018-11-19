@@ -38,7 +38,7 @@
     <body class="container-fluid" style="font-family:'Bmitra'">
 
     <div class="col-12">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-pause="false" data-interval="8000">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-pause="false" data-interval="11000">
             <ol class="carousel-indicators">
                 @foreach($sliders as $slider)
                     <li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->id}}"></li>
