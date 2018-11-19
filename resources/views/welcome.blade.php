@@ -53,7 +53,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 50px;
             }
 
             .links > a {
@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a href="{{ Route('slider') }}" style="text-decoration: none; color: inherit; font-family:'IranNastaliq'">
+                    <a href="{{ Route('slider') }}" style="text-decoration: none; color: inherit; font-family:'Bmitra'">
                         تابلو فرهنگی دانشکده مهندسی عمران، آب و محیط زیست
                     </a>
                 </div>
