@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>تابلو فرهنگی دانشکده مهندسی عمران، آب و محیط زیست</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -83,7 +83,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <a href="{{ Route('slider') }}" style="text-decoration: none; color: inherit; font-family:'IranNastaliq'">
-                        اعلامیه های الکترونیک دانشگاه شهید بهشتی
+                        تابلو فرهنگی دانشکده مهندسی عمران، آب و محیط زیست
                     </a>
                 </div>
             </div>
