@@ -47,7 +47,7 @@
             <div class="carousel-inner">
                 @forelse($sliders as $slider)
                     <div class="carousel-item {{ $loop->first ? ' active' : '' }}">
-                        <img class="d-block w-100" src="image/slider/{{$slider->id}}.jpg" alt="{{$slider->name}}">
+                        <img class="d-block w-100" src="image/slider/{{$slider->id}}.jpg" alt="{{$slider->name}}" width="1280px" height="670px">
                         <div class="carousel-caption d-md-block">
                             <h5 style="color:black;mix-blend-mode: difference">{{$slider->head}}</h5>
                             <p style="color:black;mix-blend-mode: difference">{{$slider->body}}</p>
@@ -55,7 +55,7 @@
                     </div>
                 @empty
                     <div class="item active">
-                        <img src="/image/slider/empty.jpg" alt="empty" style="width:100%;">
+                        <img src="/image/empty.jpg" alt="empty" style="width:100%;" width="1280px" height="670px">
                     </div>
                 @endforelse
             </div>

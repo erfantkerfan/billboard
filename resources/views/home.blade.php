@@ -42,6 +42,7 @@
         </div>
 
         <div class="col-4">
+
             <div class="card">
                 <div class="card-header text-center">آپلود  اعلامیه</div>
                 <div class="card-body text-right" dir="rtl">
@@ -84,9 +85,7 @@
                     </form>
                 </div>
             </div>
-        </div>
 
-        <div class="col-4 offset-8">
             <div class="card">
                 <div class="card-header text-center">ادمین های سایت</div>
                 <div class="card-body text-right" dir="rtl">
@@ -117,6 +116,7 @@
                     </table>
                 </div>
             </div>
+
         </div>
 
     </div>
