@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Config;
 use App\User;
 use Illuminate\Http\Request;
 use App\Slider;
@@ -17,13 +18,21 @@ class HomeController extends Controller
     {
         $sliders = Slider::all();
         $users = User::all();
-        return view('home')->with(['sliders'=>$sliders,'users'=>$users]);
+        $configs = Config::all();
+        return view('home')->with(['sliders'=>$sliders,'users'=>$users,'configs'=>$configs]);
     }
 
     public function slider()
     {
         $sliders = Slider::all();
-        return view('slider')->with(['sliders'=>$sliders]);
+        $refresh = 0;
+//        dd(Config::where('name','زمان هر اسلاید')->first());
+        $time = Config::where('name','زمان هر اسلاید')->first()->attribute;
+        foreach ($sliders as $slider){
+            $refresh = $refresh + ($slider->files)*$time;
+        }
+        $refresh =$refresh+2;
+        return view('slider')->with(['sliders'=>$sliders,'refresh'=>$refresh]);
     }
 
     public function create(Request $request)

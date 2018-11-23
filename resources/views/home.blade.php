@@ -32,7 +32,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
                                         <input type="hidden" class="form-control" name="id" id="id" value="{{$slider->id}}">
-                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
                                     </form>
                                 </td>
                             </tr>
@@ -82,9 +82,44 @@
                                 </div>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-primary">آپلود</button>
-                        نسبت اندازه تصویر و پسوند jpg رعایت شود
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">آپلود</button>
+                            پسوند jpg رعایت شود
+                        </div>
                     </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header text-center">تنظیمت سایت</div>
+                <div class="card-body text-right" dir="rtl">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr class="text-center">
+                            <th scope="col">نام</th>
+                            <th scope="col">مقدار</th>
+                            <th scope="col">تنظیم</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($configs as $config)
+                            <tr>
+                                <form id="config_form{{$loop->iteration}}" method="post" action="{{ route('config') }}">
+                                    <input type="hidden" form="config_form{{$loop->iteration}}" name="_token" value="{{ csrf_token() }}">
+                                    <td scope="row">
+                                        <input form="config_form{{$loop->iteration}}" type="text" class="form-control" name="name" id="name" readonly value="{{$config->name}}">
+                                    </td>
+                                    <td>
+                                        <input form="config_form{{$loop->iteration}}" type="text" class="form-control" name="attribute" id="attribute" value="{{$config->attribute}}">
+                                    </td>
+                                    <td>
+                                        <button form="config_form{{$loop->iteration}}" type="submit" class="btn btn-success btn-sm">تنظیم</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -109,7 +144,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
                                         <input type="hidden" class="form-control" name="id" id="id" value="{{$user->id}}">
-                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
                                     </form>
                                 </td>
                             </tr>

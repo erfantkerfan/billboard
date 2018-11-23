@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta http-equiv="refresh" content="{{$refresh}}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -38,7 +39,7 @@
     <body class="container-fluid" style="font-family:'Bmitra'">
 
     <div class="col-12">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-pause="false" data-interval="11000">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-pause="false" data-interval="{{\App\Config::where('name','زمان هر اسلاید')->first()->attribute*1000}}">
             {{--<ol class="carousel-indicators">--}}
                 {{--@foreach($sliders as $slider)--}}
                     {{--<li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->id}}"></li>--}}

@@ -20,7 +20,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('slider', 'HomeController@slider')->name('slider');
 
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['auth']], function () {
     // Registration Routes
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
@@ -29,8 +29,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('password', 'Auth\RegisterController@showPasswordForm')->name('password');
     Route::post('password', 'Auth\RegisterController@Password');
     // Admin Panel Routes
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('home', 'HomeController@index')->name('home');
     // Slide Routes
     Route::post('slider', 'HomeController@create');
     Route::delete('slider', 'HomeController@delete');
+    // Config Routes
+    Route::post('config','ConfigController@set')->name('config');
 });
