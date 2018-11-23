@@ -28,23 +28,38 @@ class HomeController extends Controller
 
     public function create(Request $request)
     {
-        $this->Validate($request, [
+        $request->validate([
             'name' => 'required|string',
             'body' => 'nullable|string',
             'head' => 'nullable|string',
-            'file' => 'required|image|mimes:jpeg',
+            'files' => 'required',
+            'files.*' => 'image|mimes:jpeg',
         ]);
+
+        $count = 0;
+        if ($request->hasFile('files')) {
+            $count = count($_FILES['files']['tmp_name']);
+        }
+
 
         $slider = new Slider(array(
             'name' => $request['name'],
             'body' => $request['body'],
             'head' => $request['head'],
+            'files' => $count,
         ));
 
         $slider->save();
 
-        $file_name = $slider->id .'.jpg';
-        $request->file('file')->move(public_path('image/slider/'), $file_name);
+        if($count!=0)
+        {
+            $files = $request->file('files');
+            $i =0;
+            foreach ($files as $file) {
+                $i++;
+                $file->move(public_path('image/slider/'.$slider->id.'/'), $i.'.jpg');
+            }
+        }
 
         return back();
     }
@@ -52,9 +67,14 @@ class HomeController extends Controller
     public function delete(Request $request)
     {
         $slider = Slider::FindOrFail($request->id);
-        $file_path = public_path('image/slider/').$slider->id.'.jpg';
-        unlink($file_path);
-        $slider -> delete();
-        return back();
+        $dir_name = public_path('image/slider/'.$slider->id.'/');
+        try {
+            array_map('unlink', glob("$dir_name/*.*"));
+            rmdir($dir_name);
+        }
+        finally {
+            $slider -> delete();
+            return back();
+        }
     }
 }

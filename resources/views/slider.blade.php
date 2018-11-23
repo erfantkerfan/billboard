@@ -39,20 +39,24 @@
 
     <div class="col-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-pause="false" data-interval="11000">
-            <ol class="carousel-indicators">
-                @foreach($sliders as $slider)
-                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->id}}"></li>
-                @endforeach
-            </ol>
+            {{--<ol class="carousel-indicators">--}}
+                {{--@foreach($sliders as $slider)--}}
+                    {{--<li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->id}}"></li>--}}
+                {{--@endforeach--}}
+            {{--</ol>--}}
             <div class="carousel-inner">
+{{--                {{dd($sliders[0])}}--}}
                 @forelse($sliders as $slider)
-                    <div class="carousel-item {{ $loop->first ? ' active' : '' }}">
-                        <img class="d-block w-100" src="image/slider/{{$slider->id}}.jpg" alt="{{$slider->name}}" width="1280px" height="670px">
-                        <div class="carousel-caption d-md-block">
-                            <h5 style="color:black;mix-blend-mode: difference">{{$slider->head}}</h5>
-                            <p style="color:black;mix-blend-mode: difference">{{$slider->body}}</p>
+                    @for ($i = 1; $i <= $slider->files; $i++)
+                        {{--<div class="carousel-item {{ $loop->first ? ' active' : '' }}">--}}
+                        <div class="carousel-item @if($loop->first && $i==1) active @endif">
+                            <img class="d-block w-100" src="image/slider/{{$slider->id}}/{{$i}}.jpg" alt="{{$slider->name}}" width="1280px" height="670px">
+                            <div class="carousel-caption d-md-block">
+                                <h5 style="color:black;mix-blend-mode: difference">{{$slider->head}}</h5>
+                                <p style="color:black;mix-blend-mode: difference">{{$slider->body}}</p>
+                            </div>
                         </div>
-                    </div>
+                    @endfor
                 @empty
                     <div class="item active">
                         <img src="/image/empty.jpg" alt="empty" style="width:100%;" width="1280px" height="670px">
