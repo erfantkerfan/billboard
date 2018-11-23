@@ -91,7 +91,7 @@
             </div>
 
             <div class="card">
-                <div class="card-header text-center">تنظیمت سایت</div>
+                <div class="card-header text-center">تنظیمات سایت</div>
                 <div class="card-body text-right" dir="rtl">
                     <table class="table">
                         <thead class="thead-light">
